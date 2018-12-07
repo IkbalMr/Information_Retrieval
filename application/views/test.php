@@ -1,3 +1,7 @@
+<?php
+$this->load->view('summarize');
+?>
+
 <!DOCTYPE html>
 <html lang="en" class=" js no-touch">
 
@@ -17,6 +21,24 @@
     Author URL: https://bootstrapmade.com
   ======================================================= -->
 </head>
+<body>
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+    include "./summarize.php";
+    
+    // scan nama file korpus
+    $dir_corpus = "./assets/corpus";
+    $files    = scandir($dir_corpus);
+    $files    = array_slice($files, 2);
+    
+    // hasil
+    if(isset($_POST["filename"])) {
+      $filename  = $_POST["filename"];
+      $output    = summarize($filename);
+      $title     = substr($filename, 0, -4);
+    }
+
+  ?>
 
 <body>
  <!--HEADER START-->

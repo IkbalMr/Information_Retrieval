@@ -22,4 +22,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('test');
 	}
+	
+	public function ringkas()
+	{
+		$this->load->view('summarize.php');
+	}	
 }
