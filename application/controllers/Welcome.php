@@ -25,6 +25,6 @@ class Welcome extends CI_Controller {
 	
 	public function ringkas()
 	{
-		$this->load->view('summarize.php');
+		$this->load->model('summarize.php');
 	}	
 }
