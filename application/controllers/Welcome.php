@@ -16,12 +16,32 @@ class Welcome extends CI_Controller {
 	 *
 	 * So any other public methods not prefixed with an underscore will
 	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 * 	@see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
 	public function index()
-	{
-		$this->load->view('test');
+	{	
+		$model =  $this->load->model('Summarize');
+		$model = new Summarize();
+		$testing=[];
+	$dir_corpus = "/opt/lampp/htdocs/Project/assets/corpus";
+    $files    = scandir($dir_corpus);
+    $files    = array_slice($files, 2);
+    
+    // hasil
+    if(isset($_POST['filename'])) {
+	$filename = $_POST['filename'];
+	  $data['filename']  = $filename;
+	
+      $testing    = $model->ringkasan($filename);
+      $title     = substr($filename, 0, -4);
+    }
+
+	
+		$this->load->view('test',['dir'=>$files,'model'=>$model,'datanya'=>$testing]);
+				
 	}
+	
 	
 	
 }

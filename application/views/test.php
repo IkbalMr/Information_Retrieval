@@ -1,7 +1,3 @@
-<?php
-$this->load->view('summarize');
-?>
-
 <!DOCTYPE html>
 <html lang="en" class=" js no-touch">
 
@@ -24,19 +20,7 @@ $this->load->view('summarize');
 <body>
   <?php
     error_reporting(E_ERROR | E_PARSE);
-    include "./summarize.php";
     
-    // scan nama file korpus
-    $dir_corpus = "./assets/corpus";
-    $files    = scandir($dir_corpus);
-    $files    = array_slice($files, 2);
-    
-    // hasil
-    if(isset($_POST["filename"])) {
-      $filename  = $_POST["filename"];
-      $output    = summarize($filename);
-      $title     = substr($filename, 0, -4);
-    }
 
   ?>
 
@@ -112,7 +96,7 @@ $this->load->view('summarize');
 								<select class="button-medium" name="filename" style="width:100%;">
 									<option>Choose one</option>
 									<?php
-									foreach ($files as $key => $value) {
+									foreach ($dir as $key => $value) {
 										$title = str_replace("_", " ", substr($value, 0, -4));
 										if($filename == $value) {
 											echo "<option value='$value' SELECTED>$title</option>";
@@ -131,12 +115,12 @@ $this->load->view('summarize');
                     	<div class="col-md-6 form-group">
                     		<h3 class="text-center">Original Text</h3>
                             <textarea style="line-height:18px;" class="form-control text-field-box" name="message" rows="10" data-rule="required" 
-                            data-msg="Please write something for us"><?php echo !empty($output['asli'])? $output['asli'] : "";?></textarea>
+                            data-msg="Please write something for us"><?php echo $datanya['asli']? $datanya['asli'] : "";?></textarea>
                         </div>
                     	<div class="col-md-6 form-group">
                     		<h3 class="text-center">Summary</h3>
                             <textarea style="line-height:18px;" class="form-control text-field-box" name="message" rows="10" data-rule="required" 
-                            data-msg="Please write something for us"><?php echo !empty($output['ringkasan'])? $output['ringkasan'] : "";?></textarea>
+                            data-msg="Please write something for us"><?php echo $datanya['ringkasan']? $datanya['ringkasan'] : "";?></textarea>
                         </div>
                 </div>
 
